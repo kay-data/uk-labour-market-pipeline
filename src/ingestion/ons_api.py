@@ -115,6 +115,11 @@ if __name__ == "__main__":
     series_data = ingest_vacs01()
 
     df = combine_vacs01(series_data)
+    
+    output_path = Path("data/processed/vacs01.csv")
+    df.to_csv(output_path, index=False)
+
+    print(f"Saved to {output_path}")
 
     print(df.head())
     print(df.dtypes)

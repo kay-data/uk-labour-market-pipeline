@@ -168,6 +168,11 @@ if __name__ == "__main__":
     )
 
     df = add_period_date(df)
+    
+    output_path = Path("data/processed/vacs02.csv")
+    df.to_csv(output_path, index=False)
+
+    print(f"Saved to {output_path}")
 
     print(df.head())
     print(df.shape)

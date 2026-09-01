@@ -10,6 +10,8 @@ __pycache__/
 .venv/
 venv/
 
-# Raw and processed data
+.vscode/
+
 data/raw/*
 data/processed/*
+data/output/*
