@@ -91,10 +91,32 @@ def ingest_vacs01():
     return series_data
 
 
+def combine_vacs01(series_data):
+    vacancies = series_data[0]
+    unemployment = series_data[1]
+    ratio = series_data[2]
+
+    df = vacancies.merge(
+        unemployment[["period_date", "unemployment_thousands"]],
+        on="period_date",
+        how="left",
+    )
+
+    df = df.merge(
+        ratio[["period_date", "unemployed_per_vacancy"]],
+        on="period_date",
+        how="left",
+    )
+
+    return df
+
+
 if __name__ == "__main__":
     series_data = ingest_vacs01()
 
-    for df in series_data:
-        print(df.head())
-        print(df.dtypes)
-        print(df.shape)
+    df = combine_vacs01(series_data)
+
+    print(df.head())
+    print(df.dtypes)
+    print(df.shape)
+    print(df.isnull().sum())
